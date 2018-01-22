@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ChangeLocaleExample</string>
+    <string name="hello_world">Hello World</string>
+    <string name="btn_en">English</string>
+    <string name="btn_de">German</string>
+    <string name="btn_fr">French</string>
+    <string name="btn_bn">Bengali</string>
+</resources>
