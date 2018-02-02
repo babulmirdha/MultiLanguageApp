@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MultiLanguage/MultiLanguage.iml" filepath="$PROJECT_DIR$/MultiLanguage/MultiLanguage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MultiLanguage/MultiLanguage.iml" filepath="$PROJECT_DIR$/MultiLanguage/MultiLanguage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MultiLanguageApp.iml" filepath="$PROJECT_DIR$/MultiLanguageApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/MultiLanguageApp.iml" filepath="$PROJECT_DIR$/MultiLanguageApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/MultiLanguageApp/app.iml" filepath="$PROJECT_DIR$/MultiLanguageApp/app.iml" />
     </modules>
