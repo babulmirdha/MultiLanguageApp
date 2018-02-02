@@ -13,6 +13,8 @@ import java.util.Locale;
 
 public class LanguageSettings {
 
+    private static final String SHARED_PREF_NAME = "CommonPrefs";
+    private static final String LANG_PREF = "Language";
     private final Context mContext;
     private Locale myLocale;
 
@@ -29,9 +31,9 @@ public class LanguageSettings {
 
     private Lang getDefaultLang() {
 
-        String langPref = "Language";
-        SharedPreferences prefs = mContext.getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
-        return Lang.valueOf(prefs.getString(langPref, Lang.en.name()));
+
+        SharedPreferences prefs = mContext.getSharedPreferences(SHARED_PREF_NAME, Activity.MODE_PRIVATE);
+        return Lang.valueOf(prefs.getString(LANG_PREF, Lang.en.name()));
     }
 
     public void changeLang(OnChangeLanguageListener listener, Lang lang) {
@@ -47,10 +49,10 @@ public class LanguageSettings {
     }
 
     public void saveLocale(String lang) {
-        String langPref = "Language";
-        SharedPreferences prefs = mContext.getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
+
+        SharedPreferences prefs = mContext.getSharedPreferences(SHARED_PREF_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(langPref, lang);
+        editor.putString(LANG_PREF, lang);
         editor.commit();
     }
 
@@ -63,7 +65,7 @@ public class LanguageSettings {
     }
 
     public enum Lang {
-        en, bn, de, fr
+        en, bn
     }
 
     public interface OnChangeLanguageListener {
