@@ -13,7 +13,6 @@ import java.util.Locale;
 
 public class LanguageSettings {
 
-
     private final Context mContext;
     private Locale myLocale;
 
@@ -21,24 +20,30 @@ public class LanguageSettings {
         this.mContext = context;
     }
 
-
     public void loadLocale(OnChangeLanguageListener listener) {
-        String langPref = "Language";
-        SharedPreferences prefs = mContext.getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
-        String language = prefs.getString(langPref, "");
+
+
+        Lang language = getDefaultLang();
         changeLang(listener, language);
     }
 
-    public void changeLang(OnChangeLanguageListener listener, String lang) {
-        if (lang.equalsIgnoreCase(""))
+    private Lang getDefaultLang() {
+
+        String langPref = "Language";
+        SharedPreferences prefs = mContext.getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
+        return Lang.valueOf(prefs.getString(langPref, Lang.en.name()));
+    }
+
+    public void changeLang(OnChangeLanguageListener listener, Lang lang) {
+        if (lang.name().equalsIgnoreCase(""))
             return;
-        myLocale = new Locale(lang);
-        saveLocale(lang);
+        myLocale = new Locale(lang.name());
+        saveLocale(lang.name());
         Locale.setDefault(myLocale);
-        android.content.res.Configuration config = new android.content.res.Configuration();
+        Configuration config = new Configuration();
         config.locale = myLocale;
         mContext.getResources().updateConfiguration(config, mContext.getResources().getDisplayMetrics());
-        listener.updateTexts();
+        listener.updateTexts(lang);
     }
 
     public void saveLocale(String lang) {
@@ -57,7 +62,11 @@ public class LanguageSettings {
         }
     }
 
+    public enum Lang {
+        en, bn, de, fr
+    }
+
     public interface OnChangeLanguageListener {
-        void updateTexts();
+        void updateTexts(Lang lang);
     }
 }

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements LanguageSettings.
     }
 
     @Override
-    public void updateTexts() {
+    public void updateTexts(LanguageSettings.Lang lang) {
         txt_hello.setText(R.string.hello_world);
     }
 
