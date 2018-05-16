@@ -29,35 +29,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.btn_bn.setOnClickListener(this);
         this.btn_fr.setOnClickListener(this);
         this.btn_de.setOnClickListener(this);
-        loadLocale();
+       // Localization.loadLocale(this);
+
+
     }
-    public void loadLocale()
-    {
-        String langPref = "Language";
-        SharedPreferences prefs = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
-        String language = prefs.getString(langPref, "");
-        changeLang(language);
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LanguageSettings.setLocale(this);
     }
-    public void saveLocale(String lang)
-    {
-        String langPref = "Language";
-        SharedPreferences prefs = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(langPref, lang);
-        editor.commit();
-    }
-    public void changeLang(String lang)
-    {
-        if (lang.equalsIgnoreCase(""))
-            return;
-        myLocale = new Locale(lang);
-        saveLocale(lang);
-        Locale.setDefault(myLocale);
-        android.content.res.Configuration config = new android.content.res.Configuration();
-        config.locale = myLocale;
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        updateTexts();
-    }
+
     private void updateTexts()
     {
         txt_hello.setText(R.string.hello_world);
@@ -85,15 +67,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
-        changeLang(lang);
+//        Localization.saveLocale(this,lang);
+//        Localization.loadLocale(this);
+
+        LanguageSettings.setNewLocale(this,lang);
+
     }
-    @Override
-    public void onConfigurationChanged(android.content.res.Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (myLocale != null){
-            newConfig.locale = myLocale;
-            Locale.setDefault(myLocale);
-            getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
-        }
-    }
+
 }
